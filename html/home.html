@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSC - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: {
+                            '50': '#eff6ff',
+                            '100': '#dbeafe',
+                            '200': '#bfdbfe',
+                            '300': '#93c5fd',
+                            '400': '#60a5fa',
+                            '500': '#3b82f6',
+                            '600': '#2563eb',
+                            '700': '#1d4ed8',
+                            '800': '#1e40af',
+                            '900': '#1e3a8a',
+                            '950': '#172554',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .dark .dark\:glassmorphism {
+            background: rgba(15, 23, 42, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .hamburger-icon {
+            width: 24px;
+            height: 24px;
+            color: currentColor;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -40%;
+            width: 40%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 80px 24px 24px;
+        }
+
+        .dark .mobile-menu {
+            background: rgba(15, 23, 42, 0.95);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mobile-nav a {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: currentColor;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: rgb(59, 130, 246);
+        }
+
+        .mobile-nav a.text-primary-500 {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Show hamburger on mobile */
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: block;
+            }
+            
+            .hidden.md\:flex {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .mobile-menu {
+                width: 70%;
+                right: -70%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glassmorphism">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center space-x-3 flex-1">
+                    <label for="logo-uploader" class="cursor-pointer group">
+                        <img id="header-logo" src="/DSC/transparent-logo.png" alt="DSC Logo" class="h-10 transition-all duration-300 group-hover:opacity-80" />
+                    </label>
+                    <input type="file" id="logo-uploader" class="hidden" accept="image/*" />
+                    <span class="text-xl font-bold tracking-tight hidden sm:block">DSC</span>
+                </div>
+
+                <!-- Centered Navigation -->
+                <div class="hidden md:flex items-center justify-center space-x-8 flex-1">
+                    <a href="home.html" class="text-sm font-bold text-primary-500 transition-colors">Home</a>
+                    <a href="#" class="text-sm font-medium hover:text-primary-500 transition-colors">Events</a>
+                    <a href="index.html" class="text-sm font-medium hover:text-primary-500 transition-colors">Team</a>
+                    <a href="#" class="text-sm font-medium hover:text-primary-500 transition-colors">Projects</a>
+                    <a href="#" class="text-sm font-medium hover:text-primary-500 transition-colors">Contact</a>
+                </div>
+
+                <!-- Right Section -->
+                <div class="flex items-center space-x-4 justify-end flex-1">
+                    <!-- Hamburger Menu for Mobile -->
+                    <div class="hamburger-menu md:hidden" id="hamburger">
+                        <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </div>
+
+                    <!-- Dark Mode Toggle and Join Button -->
+                    <button id="dark-mode-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                        <svg id="sun-icon" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.93 17.66 1.41-1.41"/><path d="m17.66 4.93 1.41-1.41"/></svg>
+                        <svg id="moon-icon" class="h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    </button>
+                    <a href="#" class="hidden sm:inline-block bg-primary-600 text-white px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:bg-primary-700 transition-all transform hover:scale-105">
+                        Join Us
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-blue-400">
+            Connect, Learn, and Grow
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            A community of student developers passionate about technology. We organize workshops, hackathons, and tech talks to foster learning and collaboration.
+        </p>
+        <button class="mt-6 px-6 py-3 rounded-lg bg-primary-600 text-white font-semibold shadow-md hover:bg-primary-700 transition-all">
+            Learn More
+        </button>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div class="glassmorphism p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all text-center">
+            <h3 class="text-xl font-semibold mb-2 text-primary-500">Workshops</h3>
+            <p class="text-slate-700 dark:text-slate-300 text-sm">Hands-on coding sessions on modern web and app development technologies.</p>
+        </div>
+        <div class="glassmorphism p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all text-center">
+            <h3 class="text-xl font-semibold mb-2 text-primary-500">Hackathons</h3>
+            <p class="text-slate-700 dark:text-slate-300 text-sm">Collaborate and build innovative solutions in a competitive environment.</p>
+        </div>
+        <div class="glassmorphism p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all text-center">
+            <h3 class="text-xl font-semibold mb-2 text-primary-500">Events</h3>
+            <p class="text-slate-700 dark:text-slate-300 text-sm">Tech talks, guest speakers, and networking opportunities.</p>
+        </div>
+        <div class="glassmorphism p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all text-center">
+            <h3 class="text-xl font-semibold mb-2 text-primary-500">Community</h3>
+            <p class="text-slate-700 dark:text-slate-300 text-sm">Over 200+ active members learning and growing together.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 dark:bg-slate-950/50 border-t border-slate-200 dark:border-slate-800 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center space-x-3">
+                    <img id="footer-logo" src="20251001_1540_High-Resolution Transparent Logo_remix_01k6fkyk15fstanmaf55snzkm2.png" alt="DSC Logo" class="h-10" />
+                    <span class="text-xl font-bold">DSC</span>
+                </div>
+                <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+                    <a class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-500 transition-colors" href="#">Home</a>
+                    <a class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-500 transition-colors" href="#">Events</a>
+                    <a class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-500 transition-colors" href="#">Team</a>
+                    <a class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-500 transition-colors" href="#">Projects</a>
+                    <a class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-500 transition-colors" href="#">Contact</a>
+                </nav>
+                <div class="flex justify-center gap-6">
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-primary-500 transition-colors" href="#">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-primary-500 transition-colors" href="#">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.112 4.11a.88.88 0 10-1.76 0 .88.88 0 001.76 0zm-1.858 2.54a1.2 1.2 0 112.4 0 1.2 1.2 0 01-2.4 0zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 1.802a3.333 3.333 0 110 6.666 3.333 3.333 0 010-6.666z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-primary-500 transition-colors" href="#">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-slate-200 dark:border-slate-800 mt-8 pt-8 text-center">
+                <p class="text-slate-500 dark:text-slate-400 text-sm">© 2024 Developer Student Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+            <a href="home.html" class="text-sm font-bold text-primary-500 transition-colors">Home</a>
+            <a href="#" class="text-sm font-medium hover:text-primary-500 transition-colors">Events</a>
+            <a href="index.html" class="text-sm font-medium hover:text-primary-500 transition-colors">Team</a>
+            <a href="#" class="text-sm font-medium hover:text-primary-500 transition-colors">Projects</a>
+            <a href="#" class="text-sm font-medium hover:text-primary-500 transition-colors">Contact</a>
+            <a href="#" class="sm:hidden bg-primary-600 text-white px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:bg-primary-700 transition-all text-center mt-4">
+                Join Us
+            </a>
+        </nav>
+    </div>
+    <script src="/scripts/home-script.js"></script>
+</body>
+</html>
